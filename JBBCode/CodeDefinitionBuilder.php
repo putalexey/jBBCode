@@ -17,6 +17,8 @@ class CodeDefinitionBuilder
     protected $tagName;
     /** @var boolean */
     protected $useOption = false;
+    /** @var boolean */
+    protected $closableTag = true;
     /** @var string */
     protected $replacementText;
     /** @var boolean */
@@ -75,6 +77,18 @@ class CodeDefinitionBuilder
     public function setUseOption($option)
     {
         $this->useOption = $option;
+        return $this;
+    }
+
+    /**
+     * Set whether or not the built CodeDefinition needs close bbcode tag
+     *
+     * @param boolean $option  true iff the definition needs closable tag
+     * @return self
+     */
+    public function setClosableTag($option)
+    {
+        $this->closableTag = $option;
         return $this;
     }
 

@@ -596,7 +596,10 @@ class Parser
             $el->setAttribute($options);
         }
         $parent->addChild($el);
-        return $el;
+        if($code->getClosableTag()) {
+            return $el;
+        }
+        return $parent;
     }
 
     /**

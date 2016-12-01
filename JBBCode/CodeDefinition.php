@@ -17,6 +17,9 @@ class CodeDefinition
     /** @var boolean Whether or not this CodeDefinition uses an option parameter. */
     protected $useOption;
 
+    /* @var boolean Whether or not this CodeDefinition needs close tag */
+    protected $closableTag;
+
     /** @var string The replacement text to be used for simple CodeDefinitions */
     protected $replacementText;
 
@@ -40,10 +43,11 @@ class CodeDefinition
      */
     public static function construct($tagName, $replacementText, $useOption = false,
             $parseContent = true, $nestLimit = -1, $optionValidator = array(),
-            $bodyValidator = null)
+            $bodyValidator = null, $closableTag = true)
     {
         $def = new CodeDefinition();
         $def->elCounter = 0;
+        $def->closableTag = $closableTag;
         $def->setTagName($tagName);
         $def->setReplacementText($replacementText);
         $def->useOption = $useOption;
@@ -68,6 +72,7 @@ class CodeDefinition
          * version of jBBCode. */
         $this->parseContent = true;
         $this->useOption = false;
+        $this->closableTag = true;
         $this->nestLimit = -1;
         $this->elCounter = 0;
         $this->optionValidator = array();
@@ -326,5 +331,25 @@ class CodeDefinition
     public function getCounter()
     {
         return $this->elCounter;
+    }
+
+    /**
+     * Sets is this tag needs close tag.
+     *
+     * @param boolean $bool
+     */
+    public function setClosableTag($bool)
+    {
+        $this->closableTag = $bool;
+    }
+
+    /**
+     * Returns the current value of the element counter.
+     *
+     * @return boolean true if this CodeDefinition needs close tag, false otherwise
+     */
+    public function getClosableTag()
+    {
+        return $this->closableTag;
     }
 }
